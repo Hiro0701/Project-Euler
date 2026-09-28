@@ -429,8 +429,88 @@ def find_champernowne_constant(n: int) -> int:
 
 """
 
-
+# TODO
 def find_largest_pandigital_prime() -> int:
     prime_under_9_digits_list = find_prime_numbers_by_n(1000000000)
 
     print(prime_under_9_digits_list)
+
+
+"""
+42번 문제
+
+
+"""
+
+
+def convert_word_to_ord(word: str) -> int:
+    return sum(
+        ord(i) - 64 for i in word
+    )
+
+def get_triangle_numbers(n: int) -> list:
+    triangle_numbers_list = []
+    triangle_number = 0
+    i = 1
+    while True:
+        triangle_number = i * (i + 1) // 2
+        if triangle_number < n:
+            triangle_numbers_list.append(triangle_number)
+            i += 1
+        else:
+            return triangle_numbers_list
+
+
+"""
+45번 문제
+
+
+"""
+
+def triangular_formula(n: int) -> int:
+    return n * (n + 1) // 2
+
+def pentagonal_formula(n: int) -> int:
+    return n * (3*n - 1) // 2
+
+def hexagonal_formula(n: int) -> int:
+    return n * (2*n - 1)
+
+def find_tri_pen_hex_number(n: int) -> int:
+    triangular_num_set = set()
+    pentagonal_num_set = set()
+    hexagonal_num_set = set()
+
+    for i in range(2, n):
+        triangular_num_set.add(triangular_formula(i))
+        pentagonal_num_set.add(pentagonal_formula(i))
+        hexagonal_num_set.add(hexagonal_formula(i))
+
+    return triangular_num_set & pentagonal_num_set & hexagonal_num_set
+
+
+"""
+46번 문제
+
+
+"""
+
+def goldbach_formula(n: int, prime_list: list)-> bool:
+    for a, b in permutations(prime_list, 2):
+        if a + (2 * (b ** 2)):
+            return True
+    return False
+
+def find_false_odd_composite() -> int:
+    prime_list = [2]
+
+    i = 3
+    while True:
+        if is_prime(i):
+            prime_list.append(i)
+        else:
+            if not goldbach_formula(i, prime_list):
+                return i
+        i += 2
+        print(prime_list)
+        print(i)
